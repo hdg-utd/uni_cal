@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "Unical",
+  "description": "Fill_in_later",
+  "version": "1.0",
+
+  // "browser_action": {
+  //   "default_icon": "icon.png",
+  //   "default_popup": "popup.html"
+  // },
+  "icons": { "16": "icon.png",
+           "48": "icon.png",
+          "128": "icon.png" 
+  },
+
+  "permissions": [
+    "tabs"
+  ],
+
+   "content_scripts": [
+    {
+      "matches": ["http://coursebook.utdallas.edu/*", "https://coursebook.utdallas.edu/*"],
+      "js": ["myScripts.js"]
+    }
+  ]
+}
