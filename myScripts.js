@@ -82,11 +82,13 @@ var icsFormatter = function() {
             var start = start_year + start_month + start_day + start_time;
             var end = end_year + end_month + end_day + end_time;
 
+            // Currently Repeat Set to the timings of Spring 2017 Semester
             var calendarEvent = [
                 'BEGIN:VEVENT',
                 'CLASS:PUBLIC',
                 'DESCRIPTION:' + description,
                 'DTSTART;VALUE=DATE:' + start,
+                'RRULE:FREQ=WEEKLY;UNTIL=20170330T000000Z',
                 'DTEND;VALUE=DATE:' + end,
                 'LOCATION:' + location,
                 'SUMMARY;LANGUAGE=en-us:' + subject,
@@ -197,6 +199,8 @@ for (var i = 0; i < trArray.length; i++) {
 			dayArray.push(5);
 		}
 
+    //console.log(dayArray);
+
 		// Collect the timings of each day
 		var timingChild = daysChild.split(";");
 		var timeStringArr = timingChild[timingChild.length - 1].split("-");
@@ -214,7 +218,6 @@ for (var i = 0; i < trArray.length; i++) {
 		adjustmentfactor = parseInt(splitStartTimeArr[0]) + adjustmentfactor;
 		startCFTime.push(adjustmentfactor);
 		startCFTime.push(parseInt(splitStartTimeArr[1].substring(0,2)));
-		console.log(startCFTime);
 
 		// Correct format of end time
 		var splitEndTimeArr = timeStringArr[1].split(":");
@@ -226,7 +229,6 @@ for (var i = 0; i < trArray.length; i++) {
 		adjustmentfactor = parseInt(splitEndTimeArr[0]) + adjustmentfactor;
 		endCFTime.push(adjustmentfactor);
 		endCFTime.push(parseInt(splitEndTimeArr[1].substring(0, 2)));
-		console.log(endCFTime);
 
 
 		// Creating Calendar entry
@@ -240,18 +242,78 @@ for (var i = 0; i < trArray.length; i++) {
 		var place = mainRow.children[4].querySelector('a').innerHTML;
 		var description = '';
 
-		var begin = new Date(2017, 0, 9);
-		var end = new Date(2017, 0, 9);
-		var dateAdjust = 9 + (dayArray[0] - semesterStartDay);
-		begin.setDate(dateAdjust);
-		end.setDate(dateAdjust);
-		begin.setHours(startCFTime[0]);
-		begin.setMinutes(startCFTime[1]);
-		end.setHours(endCFTime[0]);
-		end.setMinutes(endCFTime[1]);
+    if (dayArray.length === 1) {
+  		var begin = new Date(2017, 0, 9);
+  		var end = new Date(2017, 0, 9);
+  		var dateAdjust = 9 + (dayArray[0] - semesterStartDay);
+  		begin.setDate(dateAdjust);
+  		end.setDate(dateAdjust);
+  		begin.setHours(startCFTime[0]);
+  		begin.setMinutes(startCFTime[1]);
+  		end.setHours(endCFTime[0]);
+  		end.setMinutes(endCFTime[1]);
 
-		calEntry.addEvent(title, description, place, begin.toUTCString(), end.toUTCString());
-		calEntry.download('Class Schedule');
+  		calEntry.addEvent(title, description, place, begin.toUTCString(), end.toUTCString());
+  		calEntry.download('Class Schedule');
+    } else if (dayArray.length === 2) {
+      var begin1 = new Date(2017, 0, 9);
+      var end1 = new Date(2017, 0, 9);
+      var dateAdjust1 = 9 + (dayArray[0] - semesterStartDay);
+      begin1.setDate(dateAdjust1);
+      end1.setDate(dateAdjust1);
+      begin1.setHours(startCFTime[0]);
+      begin1.setMinutes(startCFTime[1]);
+      end1.setHours(endCFTime[0]);
+      end1.setMinutes(endCFTime[1]);
+      calEntry.addEvent(title, description, place, begin1.toUTCString(), end1.toUTCString());
+      
+      var begin2 = new Date(2017, 0, 9);
+      var end2 = new Date(2017, 0, 9);
+      var dateAdjust2 = 9 + (dayArray[1] - semesterStartDay);
+      begin2.setDate(dateAdjust2);
+      end2.setDate(dateAdjust2);
+      begin2.setHours(startCFTime[0]);
+      begin2.setMinutes(startCFTime[1]);
+      end2.setHours(endCFTime[0]);
+      end2.setMinutes(endCFTime[1]);
+      calEntry.addEvent(title, description, place, begin2.toUTCString(), end2.toUTCString());
 
+      calEntry.download('Class Schedule');
+    } else if (dayArray.length === 3) {
+      var begin1 = new Date(2017, 0, 9);
+      var end1 = new Date(2017, 0, 9);
+      var dateAdjust1 = 9 + (dayArray[0] - semesterStartDay);
+      begin1.setDate(dateAdjust1);
+      end1.setDate(dateAdjust1);
+      begin1.setHours(startCFTime[0]);
+      begin1.setMinutes(startCFTime[1]);
+      end1.setHours(endCFTime[0]);
+      end1.setMinutes(endCFTime[1]);
+      calEntry.addEvent(title, description, place, begin1.toUTCString(), end1.toUTCString());
+
+      var begin2 = new Date(2017, 0, 9);
+      var end2 = new Date(2017, 0, 9);
+      var dateAdjust2 = 9 + (dayArray[1] - semesterStartDay);
+      begin2.setDate(dateAdjust2);
+      end2.setDate(dateAdjust2);
+      begin2.setHours(startCFTime[0]);
+      begin2.setMinutes(startCFTime[1]);
+      end2.setHours(endCFTime[0]);
+      end2.setMinutes(endCFTime[1]);
+      calEntry.addEvent(title, description, place, begin2.toUTCString(), end2.toUTCString());
+
+      var begin3 = new Date(2017, 0, 9);
+      var end3 = new Date(2017, 0, 9);
+      var dateAdjust3 = 9 + (dayArray[2] - semesterStartDay);
+      begin3.setDate(dateAdjust3);
+      end3.setDate(dateAdjust3);
+      begin3.setHours(startCFTime[0]);
+      begin3.setMinutes(startCFTime[1]);
+      end3.setHours(endCFTime[0]);
+      end3.setMinutes(endCFTime[1]);
+      calEntry.addEvent(title, description, place, begin3.toUTCString(), end3.toUTCString());
+
+      calEntry.download('Class Schedule');
+    }
 	});
 };
